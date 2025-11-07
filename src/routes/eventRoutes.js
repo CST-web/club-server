@@ -23,6 +23,6 @@ const upload = multer({ storage });
 
 router.get("/", getEvents);
 router.post("/create", authMiddleware, upload.single("image"), createEvent);
-router.delete("/delete:id", authMiddleware, deleteEvent);
+router.delete("/delete/:id", authMiddleware, deleteEvent);
 
 export default router;
