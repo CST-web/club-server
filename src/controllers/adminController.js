@@ -11,3 +11,7 @@ export const login = (req, res) => {
 
   res.json({ token });
 };
+
+export const redirect = () => {
+  res.redirect("https://clubscientifiquetech-art.github.io/club-dashboard/");
+};
