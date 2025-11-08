@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import { Activity } from "react";
 
 const eventSchema = new mongoose.Schema({
   activity: {
