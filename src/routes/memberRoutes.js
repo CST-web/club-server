@@ -10,7 +10,7 @@ import {
 
 const router = express.Router();
 
-router.get("/", getAllMembers);
+router.get("/", authMiddleware, adminOnly, getAllMembers);
 router.post("/", registerMember);
 router.post("/login", loginMember);
 router.post("/verify/:id", authMiddleware, adminOnly, verifyMember);
