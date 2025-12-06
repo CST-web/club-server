@@ -10,6 +10,6 @@ const router = express.Router();
 
 router.get("/", getMembers);
 router.post("/create", authMiddleware, createMember);
-router.delete("/delete:id", authMiddleware, deleteMember);
+router.delete("/delete/:id", authMiddleware, deleteMember);
 
 export default router;
