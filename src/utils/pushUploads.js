@@ -3,7 +3,7 @@ import fs from "fs";
 import path from "path";
 
 const repo = process.env.GITHUB_REPO;
-const folder = path.resolve("./uploads"); // adjust to your uploads folder
+const folder = "src/uploads"; // adjust to your uploads folder
 // Helper to run git commands and log output
 function runGitCommand(cmd) {
   return new Promise((resolve, reject) => {
@@ -29,9 +29,10 @@ export const syncUploads = async () => {
     // Git setup
     await runGitCommand('git config user.name "Render Bot"');
     await runGitCommand('git config user.email "bot@example.com"');
-
+    
     // Ensure we're on main
     await runGitCommand("git checkout -B main");
+    await runGitCommand('git status')
 
     // Stage everything in the uploads folder
     await runGitCommand(`git add -A ${folder}`);
