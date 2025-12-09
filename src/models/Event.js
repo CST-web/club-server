@@ -3,7 +3,12 @@ import mongoose from "mongoose";
 const eventSchema = new mongoose.Schema({
   activity: {
     type: String,
-    enum: ["Échecs", "Robotique", "Prix du meilleur TIPE"],
+    enum: [
+      "Échecs",
+      "Robotique",
+      "Prix du meilleur TIPE",
+      "Ateliers d'innovation",
+    ],
     required: true,
   },
   title: { type: String, required: true },
