@@ -13,5 +13,5 @@ export const login = (req, res) => {
 };
 
 export const redirect = (req, res) => {
-  res.redirect("https://clubscientifiquetech-art.github.io/club-dashboard/");
+  res.redirect("https://CST-web.github.io/club-dashboard/");
 };
