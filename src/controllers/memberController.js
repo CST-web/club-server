@@ -55,7 +55,9 @@ export const loginMember = async (req, res) => {
       { id: member._id, role: "member" },
       process.env.JWT_SECRET
     );
-    res.json({ message: "Login successful", token });
+    
+    const { password: _, ...safeMember } = member.toObject();
+    res.json({ message: "Login successful", token, member: safeMember });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
