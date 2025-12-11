@@ -1,5 +1,6 @@
 import jwt from "jsonwebtoken";
 import Member from "../models/Member.js";
+import Event from "../models/Event.js";
 
 export const getAllMembers = async (req, res) => {
   try {
@@ -53,9 +54,9 @@ export const loginMember = async (req, res) => {
 
     const token = jwt.sign(
       { id: member._id, role: "member" },
-      process.env.JWT_SECRET
+      process.env.JWT_SECRET,
     );
-    
+
     const { password: _, ...safeMember } = member.toObject();
     res.json({ message: "Login successful", token, member: safeMember });
   } catch (err) {
@@ -77,6 +78,30 @@ export const verifyMember = async (req, res) => {
     await member.save();
 
     res.status(200).json({ message: `Member(${id}) verified successfully` });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+export const unverifyMember = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const member = await Member.findById(id);
+
+    if (!member) return res.status(400).json({ message: "Invalid member ID" });
+
+    if (!member.verified)
+      return res.status(400).json({ message: "Member is already unverified" });
+
+    await Event.updateMany(
+      { members: member._id },
+      { $pull: { members: member._id } },
+    );
+
+    member.verified = false;
+    await member.save();
+
+    res.status(200).json({ message: `Member(${id}) unverified successfully` });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
