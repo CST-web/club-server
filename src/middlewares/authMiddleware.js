@@ -41,7 +41,7 @@ export const loadMember = async (req, res, next) => {
       return res.status(401).json({ message: "User no longer exists" });
     }
 
-    req.member = { memberId: member._id, username: member.username };
+    req.member = { memberId: member._id, username: member.username, verified: member.verified };
     next();
   } catch (err) {
     return res.status(500).json({ message: "Internal server error" });
