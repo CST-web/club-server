@@ -16,8 +16,8 @@ const router = express.Router();
 
 router.get("/", getEvents);
 router.post("/", authMiddleware, adminOnly, createEvent);
-router.post("/join/:id/:memberId?", authMiddleware, loadMember, joinEvent);
-router.post("/leave/:id/:memberId?", authMiddleware, loadMember, leaveEvent);
+router.post("/join/:id", authMiddleware, loadMember, joinEvent);
+router.post("/leave/:id", authMiddleware, loadMember, leaveEvent);
 router.delete("/:id", authMiddleware, adminOnly, deleteEvent);
 
 export default router;

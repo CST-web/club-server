@@ -28,7 +28,7 @@ export const adminOnly = (req, res, next) => {
 export const loadMember = async (req, res, next) => {
   try {
     let memberId =
-      req.user.role === "admin" ? req.params?.memberId : req.user?.id;
+      req.user.role === "admin" ? req.query?.memberId : req.user?.id;
 
     if (!memberId) {
       return res
