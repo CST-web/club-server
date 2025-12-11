@@ -1,5 +1,9 @@
 import express from "express";
-import { authMiddleware, adminOnly } from "../middlewares/authMiddleware.js";
+import {
+  authMiddleware,
+  adminOnly,
+  loadMember,
+} from "../middlewares/authMiddleware.js";
 import {
   getEvents,
   createEvent,
@@ -11,7 +15,7 @@ const router = express.Router();
 
 router.get("/", getEvents);
 router.post("/", authMiddleware, adminOnly, createEvent);
-router.post("/join/:id", authMiddleware, joinEvent);
+router.post("/join/:id", authMiddleware, loadMember, joinEvent);
 router.delete("/:id", authMiddleware, adminOnly, deleteEvent);
 
 export default router;
