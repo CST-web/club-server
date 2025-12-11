@@ -47,7 +47,11 @@ export const joinEvent = async (req, res) => {
     const event = await Event.findById(eventId);
     if (!event) return res.status(404).json({ message: "Event not found" });
 
-    const { memberId, username } = req.member;
+    const { memberId, username, verified } = req.member;
+
+    if (!verified) {
+      return res.status(400).json({ message: "Member is not verified" });
+    }
 
     if (event.members.includes(memberId)) {
       return res
@@ -86,7 +90,7 @@ export const leaveEvent = async (req, res) => {
     }
 
     event.members = event.members.filter(
-      (id) => id.toString() !== memberId.toString()
+      (id) => id.toString() !== memberId.toString(),
     );
 
     await event.save();
