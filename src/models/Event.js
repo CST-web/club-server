@@ -13,7 +13,7 @@ const eventSchema = new mongoose.Schema({
   },
   title: { type: String, required: true },
   description: { type: String, required: true },
-  date: { type: Date, required: true },
+  date: { type: Date, required: false },
   location: { type: String, required: true },
   memberLimit: { type: Number, required: true },
   members: { type: [String], default: [] },
